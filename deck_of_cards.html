@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Card games</title>
+</head>
+<body>
+    <script>
+        class Deck{
+            constructor(deck, suit, value){
+                this.deck;
+                this.suits = ["Spades", "Diamonds", "Clubs", "Hearts"];
+                this.values = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
+            }
+	        create_deck() {
+                let deck = []
+                for(let i = 0; i < this.suits.length; i++){
+		            for(let x = 0; x < this.values.length; x++){
+			            let card = {Value: this.values[x], Suit: this.suits[i]};
+			            deck.push(card);
+                        }
+	                }
+	            this.deck = deck;
+            }
+            shuffle() {
+                let deck_length = this.deck.length, i, t;
+                while (deck_length) {
+                    i = Math.floor(Math.random() * deck_length--);
+                    t = this.deck[deck_length];
+                    this.deck[deck_length] = this.deck[i];
+                    this.deck[i] = t;
+          }
+            return this.deck;
+        }
+            reset() {
+                for(var i = 0; i < arguments.length; i++){                    this.deck -= 1;
+                    arguments[i].hand = [];
+                this.deck = create_deck();
+                }
+        }
+            deal() {
+                let card = this.deck[this.deck.length-1]
+                this.deck.pop();
+                return card
+            }
+}
+        class Player extends Deck{
+            constructor(deck, name, hand, suit, value){
+                super(deck, suit, value);
+                this.name = name;
+                this.hand = [];
+            }
+            draw_card(deal){
+               this.hand.push(deal);
+               return this.deck;
+            }
+            discard(){
+                this.hand.pop();
+            }
+        }
+    const deck = new Deck(this.deck, this.suits, this.values)
+    const player1 = new Player('Sterling', []);
+    deck.create_deck();
+    player1.draw_card();
+    </script>
+</body>
+</html>
